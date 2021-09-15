@@ -16,8 +16,10 @@ const Select = (props) => {
                         // <button style="background: url(myimage.png)" ... />
                         return (
                             <option key={index} value={images}>
-                                <img src={images} alt="Girl in a jacket"/>
+                                {images}
+                                {/* <img src={images} alt="a"/> */}
                             </option>
+
                         )
                     })
                 }

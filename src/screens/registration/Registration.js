@@ -7,13 +7,14 @@ import image2 from '../../assets/images/clipart1717870.png'
 import Select from '../../funcComponents/UI/select/Select'
 
 const Registration = (props) => {
-    let storage = JSON.parse(localStorage.getItem('items'))
+    let storage = JSON.parse(localStorage.getItem('users'))
     const [state, setState] = useState({
         username: '',
         password: '',
         confirmPassword: '',
-        select_option: '',
-        users: storage === null ? [] : storage
+        select_option: image1,
+        users: storage === null ? [] : storage,
+        rank: 0
     })
 
     const handleChange = (e) => {
@@ -22,7 +23,6 @@ const Registration = (props) => {
             ...prevState,
             [name]: value
         }))
-        console.log(state)
     }
 
     const matchPassword = () => {
@@ -38,7 +38,8 @@ const Registration = (props) => {
                 username: state.username,
                 password: state.password,
                 confirmPassword: state.confirmPassword,
-                select_option: state.select_option
+                select_option: state.select_option,
+                rank: state.rank
             })
             console.log(state.users)
             setState(prevState => ({
@@ -46,7 +47,7 @@ const Registration = (props) => {
                 users: state.users
 
             }))
-            localStorage.setItem('items', JSON.stringify(state.users))
+            localStorage.setItem('users', JSON.stringify(state.users))
             goToLogin();
         }
         else {
@@ -65,6 +66,7 @@ const Registration = (props) => {
                     return (
                         <div key={i}>
                             {el.username}
+                            <img src={el.select_option} alt="title" />
                         </div>
                     )
                 })

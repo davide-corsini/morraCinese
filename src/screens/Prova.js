@@ -1,4 +1,4 @@
-import { buildQueries } from '@testing-library/dom'
+// import { buildQueries } from '@testing-library/dom'
 import React, { useState, useEffect, useRef } from 'react'
 import RINGS from 'vanta/dist/vanta.rings.min'
 

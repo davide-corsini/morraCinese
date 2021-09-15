@@ -17,7 +17,7 @@ const Routing = () => {
                     <Route exact path="/" component={Login} />
                     <Route path="/registration" component={Registration} />
                     <Route path="/ranking" component={Ranking} />
-                    <Route path="/game:id" component={Game} />
+                    <Route path="/game/" component={Game} />
                     <Route path="/prova" component={Prova} />
                 </Switch>
             </>

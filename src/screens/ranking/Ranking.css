@@ -1,0 +1,21 @@
+.RankingContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+}
+.SubRankingContainer {
+  width: 500px;
+  /* height: 100px; */
+  margin-top: 15%;
+  border: 10px solid gold;
+  display: flex;
+  flex-direction: column;
+}
+.RankingRow {
+  width: 100%;
+  height: 30px;
+  border: 1px solid red;
+}
