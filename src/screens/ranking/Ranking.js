@@ -4,8 +4,6 @@ const Ranking = () => {
     let users = JSON.parse(localStorage.getItem('users')) 
     users = users === null ? [] : users
 
-    const prova = () => { console.log(users) }
-
     return (
         <>
             <div className="RankingContainer">
@@ -21,7 +19,6 @@ const Ranking = () => {
                         })
                     }
                 </div>
-                <button onClick={prova}>click</button>
             </div>
         </>
     )
