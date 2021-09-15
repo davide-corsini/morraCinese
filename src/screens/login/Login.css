@@ -1,0 +1,123 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+:root{
+    --backForm: rgba(230, 219, 219, 0.315);
+    --inputColor: #EFF2EF;
+}
+
+.LoginContainer{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+   margin: 0;
+   overflow: hidden;
+}
+
+.background {
+  background: url('https://images.unsplash.com/photo-1629655110625-1fd7eb8cd06a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2089&q=80') no-repeat center center/cover;
+  position: absolute;
+  top: -30;
+  left: -30;
+  width: calc( 100vw + 60px);
+  height: calc(100vh + 60px);
+  z-index: -1;
+  filter: blur(0px);
+}
+
+.loading-text {
+  font-size: 50px;
+  color: red;
+}
+
+
+form.LoginFormContainer{
+    width: 30%;
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    /* border: 1px solid black; */
+    border-radius: 20px;
+    background-color: rgba(88, 86, 60, 0.281);
+    cursor: pointer;
+}
+
+
+.LoginInput{
+    outline: 0;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 18px;
+    width: 50%;
+    background-color: var(var(--inputColor))
+}
+
+div.LoginBtnContainer{
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+button{
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  -webkit-animation-iteration-count: infinite;
+}
+@keyframes bounce {
+	0%, 100%, 20%, 50%, 80% {
+		-webkit-transform: translateY(0);
+		-ms-transform:     translateY(0);
+		transform:         translateY(0)
+	}
+	40% {
+		-webkit-transform: translateY(-30px);
+		-ms-transform:     translateY(-30px);
+		transform:         translateY(-30px)
+	}
+	60% {
+		-webkit-transform: translateY(-15px);
+		-ms-transform:     translateY(-15px);
+		transform:         translateY(-15px)
+	}
+}
+.LoginForLoginBtn:hover, 
+.LoginForRegisterBtn:hover{
+
+    animation-name: bounce;
+  -moz-animation-name: bounce;
+}
+
+@media (max-width: 768px){
+  form.LoginFormContainer{
+    margin: 0 auto;
+    width: 80%;
+    max-width: 80%;
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    /* border: 1px solid black; */
+    border-radius: 20px;
+    background-color: rgba(88, 86, 60, 0.281);
+    cursor: pointer;
+}
+}
