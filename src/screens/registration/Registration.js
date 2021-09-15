@@ -24,15 +24,10 @@ const Registration = (props) => {
             [name]: value
         }))
     }
+    const matchPassword = () => { return (utils.pswRegexCheck(state.password) && utils.checkConfirmPasswordValidity(state.password, state.confirmPassword)) }
+    const formValidation = () => { return state.username !== '' }
 
-    const matchPassword = () => {
-        return (utils.pswRegexCheck(state.password) && utils.checkConfirmPasswordValidity(state.password, state.confirmPassword))
-    }
-    const formValidation = () => {
-        return state.username !== ''
-    }
-
-    const jasonLocalStorageValidationForm = () => {
+    const jsonLocalStorageValidationForm = () => {
         if (matchPassword() && formValidation()) {
             state.users.push({
                 username: state.username,
@@ -45,7 +40,6 @@ const Registration = (props) => {
             setState(prevState => ({
                 ...prevState,
                 users: state.users
-
             }))
             localStorage.setItem('users', JSON.stringify(state.users))
             goToLogin();
@@ -55,14 +49,11 @@ const Registration = (props) => {
         }
     }
 
-    const goToLogin = () => {
-        props.history.push('/')
-    }
+    const goToLogin = () => { props.history.push('/') }
     return (
         <>
             {
-                state.users.length > 0 &&
-                state.users.map((el, i) => {
+                state.users.length > 0 && state.users.map((el, i) => {
                     return (
                         <div key={i}>
                             {el.username}
@@ -103,7 +94,7 @@ const Registration = (props) => {
                     type="button"
                     name="loginButton"
                     title="Conferma"
-                    callback={jasonLocalStorageValidationForm}
+                    callback={jsonLocalStorageValidationForm}
                 />
             </form>
         </>

@@ -53,26 +53,14 @@ const Login = (props) => {
 
     const goToGame = (params) => {
         let storage = JSON.parse(localStorage.getItem('users'));
-        console.log(storage)
-        let newArr = [];
-        // storage.forEach((el, index) => {
-
-        // })
         let newStorage = storage.find((i) => state.username === i.username)
-        console.log('NEW STORAGE: ', newStorage);
         let userStorage = localStorage.setItem('loggedUser', JSON.stringify(newStorage));
         console.log(userStorage)
-
-        // props.history.push('/game/' + params, {
-        //     id: newStorage,
-        //     login: true
-        // })
 
         props.history.push({
             pathname: `/game/?id=${newStorage.username}&login=${true}`,
             state: newStorage
         })
-
 
         // console.log('SONO OBJ GIUSTO: ' , newStorage)
         // props.history.push('/game/'+ params, {
@@ -86,7 +74,6 @@ const Login = (props) => {
     return (
         <>
             <div style={{ width: '100', height: '100' }} ref={myRef} className="LoginContainer">
-                {/* <Draggable> */}
                 <form className="LoginFormContainer">
                     <Input
                         value={state.username}
@@ -122,7 +109,6 @@ const Login = (props) => {
                         />
                     </div>
                 </form>
-                {/* </Draggable> */}
             </div>
 
         </>
