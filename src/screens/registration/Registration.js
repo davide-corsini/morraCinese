@@ -2,7 +2,9 @@ import React, { useState } from 'react'
 import Button from '../../funcComponents/UI/button/Button'
 import Input from '../../funcComponents/UI/input/Input'
 import utils from '../../utils'
-
+import image1 from '../../assets/images/clipart1623921.png'
+import image2 from '../../assets/images/clipart1717870.png'
+import Select from '../../funcComponents/UI/select/Select'
 
 const Registration = (props) => {
     let storage = JSON.parse(localStorage.getItem('items'))
@@ -10,6 +12,7 @@ const Registration = (props) => {
         username: '',
         password: '',
         confirmPassword: '',
+        select_option: '',
         users: storage === null ? [] : storage
     })
 
@@ -30,44 +33,49 @@ const Registration = (props) => {
     }
 
     const jasonLocalStorageValidationForm = () => {
-        let isValid = formValidation();
-        if (matchPassword() && isValid) {
-            let array = state.users;
-            array.push({
+        if (matchPassword() && formValidation()) {
+            state.users.push({
                 username: state.username,
                 password: state.password,
-                confirmPassword: state.confirmPassword
+                confirmPassword: state.confirmPassword,
+                select_option: state.select_option
             })
-            console.log(array)
-            setState(prevState =>({
+            console.log(state.users)
+            setState(prevState => ({
                 ...prevState,
-                users: array
+                users: state.users
 
             }))
-            localStorage.setItem('items', JSON.stringify(array))
-            goToGame();
+            localStorage.setItem('items', JSON.stringify(state.users))
+            goToLogin();
         }
-        else{
+        else {
             alert('Something Wrong')
         }
     }
 
-    const goToGame = () => {
-        props.history.push('/game:id')
+    const goToLogin = () => {
+        props.history.push('/')
     }
     return (
         <>
-        {
-            state.users.length > 0 &&
-            state.users.map((el, i) => {
-                return (
-                    <div key={i}>
-                        {el.username}
-                    </div>
-                )
-            })
-        }
+            {
+                state.users.length > 0 &&
+                state.users.map((el, i) => {
+                    return (
+                        <div key={i}>
+                            {el.username}
+                        </div>
+                    )
+                })
+            }
             <form >
+                <Select
+                    callback={handleChange}
+                    name="select_option"
+                    className="array_image"
+                    arrayImage={[image1, image2]}
+                />
                 <Input
                     value={state.username}
                     type="text"
@@ -96,7 +104,6 @@ const Registration = (props) => {
                     callback={jasonLocalStorageValidationForm}
                 />
             </form>
-
         </>
     )
 }
