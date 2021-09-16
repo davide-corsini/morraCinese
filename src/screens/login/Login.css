@@ -16,6 +16,8 @@
 .LoginRock {
   font-family: var(--rock);
 }
+
+
 .LoginScissors {
   font-family: var(--scissors);
 }
@@ -160,7 +162,6 @@ button.LoginForRegisterBtn {
   outline: 0;
   border: none;
   border-radius: 12px;
-  padding: 5px 8px;
   width: 80%;
   background-color: var(var(--inputColor))
 }
