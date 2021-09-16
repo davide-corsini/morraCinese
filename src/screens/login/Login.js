@@ -1,11 +1,42 @@
-import React, { useState, useEffect, useRef } from 'react'
-import BIRDS from 'vanta/dist/vanta.birds.min'
+import React, { useState,useEffect, useRef } from 'react'
 import Button from '../../funcComponents/UI/button/Button';
 import Input from '../../funcComponents/UI/input/Input';
+import BIRDS from 'vanta/dist/vanta.birds.min'
+
+
 import './Login.css';
 const Login = (props) => {
     const [state, setState] = useState({ username: '', password: '' })
-    const [vantaEffect, setVantaEffect] = useState(0)
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setState(prevState => ({
+            ...prevState,
+            [name]: value
+        }))
+        console.log(state)
+    }
+
+    const validation = () => {
+        let storage = JSON.parse(localStorage.getItem('users'));
+        console.log(storage)
+        storage.forEach(element => { return (element.username === state.username && element.password === state.password) ? goToGame() : false });
+    }
+
+    const goToGame = () => {
+        let storage = JSON.parse(localStorage.getItem('users'));
+        let newStorage = storage.find((i) => state.username === i.username)
+        let userStorage = localStorage.setItem('loggedUser', JSON.stringify(newStorage));
+        console.log(userStorage)
+
+        props.history.push({
+            pathname: `/game/?id=${newStorage.username}&login=${true}`,
+            state: newStorage
+        })
+    }
+
+    const goToRegister = () => { props.history.push('/registration') }
+        const [vantaEffect, setVantaEffect] = useState(0)
     const myRef = useRef(null)
 
     useEffect(() => {
@@ -19,8 +50,7 @@ const Login = (props) => {
                 minWidth: 200.00,
                 scale: 1.00,
                 scaleMobile: 1.00,
-                backgroundColor: 0xc3e3e3,
-                color1: 0x772d2d
+                backgroundColor: 0x82aac7
             }))
         }
         return () => {
@@ -28,46 +58,16 @@ const Login = (props) => {
         }
     }, [vantaEffect])
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setState(prevState => ({
-            ...prevState,
-            [name]: value
-        }))
-        console.log(state)
-    }
-
-    const validation = () => {
-        // let errors = {}
-        let storage = JSON.parse(localStorage.getItem('users'));
-        console.log(storage)
-        storage.forEach(element => { return (element.username === state.username && element.password === state.password) ? goToGame() : false });
-    }
-
-    const goToGame = (params) => {
-        let storage = JSON.parse(localStorage.getItem('users'));
-        let newStorage = storage.find((i) => state.username === i.username)
-        let userStorage = localStorage.setItem('loggedUser', JSON.stringify(newStorage));
-        console.log(userStorage)
-
-        props.history.push({
-            pathname: `/game/?id=${newStorage.username}&login=${true}`,
-            state: newStorage
-        })
-
-        // console.log('SONO OBJ GIUSTO: ' , newStorage)
-        // props.history.push('/game/'+ params, {
-        // id: newStorage,
-        // login: true
-        //local storage dove username === state.username
-    }
-
-    const goToRegister = () => { props.history.push('/registration') }
-
     return (
         <>
             <div style={{ width: '100', height: '100' }} ref={myRef} className="LoginContainer">
                 <form className="LoginFormContainer">
+                    <div className="LoginTitle">
+                        <span className="LoginRock">ROCK,</span>
+                        <span className="LoginPaper">Paper &amp;</span>
+                        <span className="LoginScissors"> Scissors</span>
+
+                    </div>
                     <Input
                         value={state.username}
                         type="text"

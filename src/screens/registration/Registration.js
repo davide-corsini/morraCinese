@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState,useEffect, useRef } from 'react'
 import Button from '../../funcComponents/UI/button/Button'
 import Input from '../../funcComponents/UI/input/Input'
 import utils from '../../utils'
@@ -7,6 +7,7 @@ import image2 from '../../assets/images/pork.gif'
 import Select from '../../funcComponents/UI/select/Select'
 import './Registration.css'
 import BIRDS from 'vanta/dist/vanta.birds.min'
+
 
 
 
@@ -21,31 +22,6 @@ const Registration = (props) => {
         users: storage === null ? [] : storage,
         rank: 0
     })
-
-
-    const [vantaEffect, setVantaEffect] = useState(0)
-    const myRef = useRef(null)
-
-    useEffect(() => {
-        if (!vantaEffect) {
-            setVantaEffect(BIRDS({
-                el: myRef.current,
-                mouseControls: true,
-                touchControls: true,
-                gyroControls: false,
-                minHeight: 200.00,
-                minWidth: 200.00,
-                scale: 1.00,
-                scaleMobile: 1.00,
-                backgroundColor: 0x82aac7
-            }))
-        }
-        return () => {
-            if (vantaEffect) vantaEffect.destroy()
-        }
-    }, [vantaEffect])
-
-
     
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -78,12 +54,32 @@ const Registration = (props) => {
             alert('Something Wrong')
         }
     }
+    const [vantaEffect, setVantaEffect] = useState(0)
+    const myRef = useRef(null)
+
+    useEffect(() => {
+        if (!vantaEffect) {
+            setVantaEffect(BIRDS({
+                el: myRef.current,
+                mouseControls: true,
+                touchControls: true,
+                gyroControls: false,
+                minHeight: 200.00,
+                minWidth: 200.00,
+                scale: 1.00,
+                scaleMobile: 1.00,
+                backgroundColor: 0x82aac7
+            }))
+        }
+        return () => {
+            if (vantaEffect) vantaEffect.destroy()
+        }
+    }, [vantaEffect])
 
     const goToLogin = () => { props.history.push('/') }
     return (
-        <div style={{ width: '100', height: '100' }} ref={myRef} className="RegistrationContainer">
+        <div ref={myRef} style={{ width: '100', height: '100' }} className="RegistrationContainer">
             
-
             <form className="RegistrationForm">
                 <Select
                     callback={handleChange}
