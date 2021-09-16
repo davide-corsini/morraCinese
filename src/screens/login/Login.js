@@ -19,15 +19,8 @@ const Login = (props) => {
                 minWidth: 200.00,
                 scale: 1.00,
                 scaleMobile: 1.00,
-                backgroundColor: 0xdedabe,
-                color1: 0x55598,
-                color2: 0xffb300,
-                colorMode: "lerpGradient",
-                birdSize: 4.40,
-                wingSpan: 22.00,
-                separation: 38.00,
-                alignment: 37.00,
-                cohesion: 141.00
+                backgroundColor: 0xc3e3e3,
+                color1: 0x772d2d
             }))
         }
         return () => {

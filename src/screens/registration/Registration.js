@@ -1,10 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Button from '../../funcComponents/UI/button/Button'
 import Input from '../../funcComponents/UI/input/Input'
 import utils from '../../utils'
-import image1 from '../../assets/images/clipart1623921.png'
-import image2 from '../../assets/images/clipart1717870.png'
+import image1 from '../../assets/images/dog.gif'
+import image2 from '../../assets/images/pork.gif'
 import Select from '../../funcComponents/UI/select/Select'
+import './Registration.css'
+import BIRDS from 'vanta/dist/vanta.birds.min'
+
+
+
 
 const Registration = (props) => {
     let storage = JSON.parse(localStorage.getItem('users'))
@@ -17,6 +22,31 @@ const Registration = (props) => {
         rank: 0
     })
 
+
+    const [vantaEffect, setVantaEffect] = useState(0)
+    const myRef = useRef(null)
+
+    useEffect(() => {
+        if (!vantaEffect) {
+            setVantaEffect(BIRDS({
+                el: myRef.current,
+                mouseControls: true,
+                touchControls: true,
+                gyroControls: false,
+                minHeight: 200.00,
+                minWidth: 200.00,
+                scale: 1.00,
+                scaleMobile: 1.00,
+                backgroundColor: 0x82aac7
+            }))
+        }
+        return () => {
+            if (vantaEffect) vantaEffect.destroy()
+        }
+    }, [vantaEffect])
+
+
+    
     const handleChange = (e) => {
         const { name, value } = e.target;
         setState(prevState => ({
@@ -59,23 +89,14 @@ const Registration = (props) => {
         props.history.push('/')
     }
     return (
-        <>
-            {
-                state.users.length > 0 &&
-                state.users.map((el, i) => {
-                    return (
-                        <div key={i}>
-                            {el.username}
-                            <img src={el.select_option} alt="title" />
-                        </div>
-                    )
-                })
-            }
-            <form >
+        <div style={{ width: '100', height: '100' }} ref={myRef} className="RegistrationContainer">
+            
+
+            <form className="RegistrationForm">
                 <Select
                     callback={handleChange}
                     name="select_option"
-                    className="array_image"
+                    className="RegistrationSelect"
                     arrayImage={[image1, image2]}
                 />
                 <Input
@@ -83,6 +104,7 @@ const Registration = (props) => {
                     type="text"
                     name="username"
                     placeholder="Username"
+                    className="RegistrationInput"
                     callback={handleChange}
                 />
                 <Input
@@ -90,6 +112,7 @@ const Registration = (props) => {
                     type="password"
                     name="password"
                     placeholder="Password"
+                    className="RegistrationInput"
                     callback={handleChange}
                 />
                 <Input
@@ -97,16 +120,18 @@ const Registration = (props) => {
                     type="password"
                     name="confirmPassword"
                     placeholder="Confirm Password"
+                    className="RegistrationInput"
                     callback={handleChange}
                 />
                 <Button
                     type="button"
                     name="loginButton"
-                    title="Conferma"
+                    title="Register"
+                    className="RegistrationBtn"
                     callback={jasonLocalStorageValidationForm}
                 />
             </form>
-        </>
+        </div>
     )
 }
 
