@@ -10,12 +10,7 @@ import Registration from "./screens/registration/Registration";
 import Prova from "./screens/Prova";
 import './Routing.css'
 
-
-
 const Routing = (prop) => {
-
-
-
     return (
         <Router>
 

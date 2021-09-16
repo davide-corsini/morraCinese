@@ -144,12 +144,10 @@ const Game = (props) => {
 
                 <div className="GameCardCpu">
                     <div className="GameCardTitle GameUserName">
-
                         <h3
                             className="GameUserName"
                             style={{ textTransform: 'capitalize' }}
                         >CPU</h3>
-
                     </div>
                     <div className="GameUserImage">
                         <Spritesheet
@@ -169,11 +167,6 @@ const Game = (props) => {
                             }}
                         />
                     </div>
-                    {/* <div className="GameUserAttack">
-                        <div className="GameUserChoice" onClick={() => handleGame("rock")}><img src={Rock} alt="title" /></div>
-                        <div className="GameUserChoice" onClick={() => handleGame("paper")}><img src={Paper} alt="title" /></div>
-                        <div className="GameUserChoice" onClick={() => handleGame("scissor")}><img src={Scissors} alt="title" /></div>
-                    </div> */}
                     <div className="GameUserDescription" style={{ fontFamily: 'Open Sans Condensed' }}>
                         My choice is: {result.choiceCPU}
                     </div>
