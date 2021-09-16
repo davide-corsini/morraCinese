@@ -11,9 +11,7 @@ import Button from './../../funcComponents/UI/button/Button'
 
 
 const Game = (props) => {
-    let storageGet = JSON.parse(localStorage.getItem('users')) // [{}, {}, {}]
-    console.log("storageGet: ", storageGet)
-    console.log(props)
+    let storageGet = JSON.parse(localStorage.getItem('users'))
     const [result, setResult] = useState({
         rankUser: props.location.state.rank,
         round: 3,
@@ -21,11 +19,6 @@ const Game = (props) => {
         pointsCPU: 0,
         choice: null,
     })
-    let risultato = 0;
-
-    console.log(result)
-    // console.log("punti Utente", result.pointsUser)
-    // console.log("punti CPU", result.pointsCPU)
 
     const handleScore = (input) => {
         switch (input) {
@@ -41,50 +34,48 @@ const Game = (props) => {
         }
     }
 
-
-
     const handleGame = (moveUser) => {
         let moveComputer = ["paper", "scissor", "rock"][Math.floor(Math.random() * 3)]
         console.log(`user: ${moveUser} \ncomputer: ${moveComputer}`)
-
-        if (result.round > 0) { //controllare se cambiare con IF
-            if (moveUser === moveComputer) return handleScore("draw") //ritorna risultato o risultato+1
+        if (result.round > 0) {
+            if (moveUser === moveComputer) return handleScore("draw")
             else {
-                if (moveUser === "paper") return (moveComputer === "scissor" ? handleScore("lose") : handleScore("win")) //ritorna risultato-1 o risultato+1
-                if (moveUser === "scissor") return (moveComputer === "rock" ? handleScore("lose") : handleScore("win")) //ritorna risultato-1 o risultato+1
-                if (moveUser === "rock") return (moveComputer === "paper" ? handleScore("lose") : handleScore("win")) //ritorna risultato-1 o risultato+1
+                if (moveUser === "paper") return (moveComputer === "scissor" ? handleScore("lose") : handleScore("win"))
+                if (moveUser === "scissor") return (moveComputer === "rock" ? handleScore("lose") : handleScore("win"))
+                if (moveUser === "rock") return (moveComputer === "paper" ? handleScore("lose") : handleScore("win"))
             }
         }
 
-        if (moveUser > moveComputer) {
-            setResult({
-                ...result,
-                rankUser: result.rankUser += 1
-            })
-            console.log("rankUser: ", result.rankUser)
-
+        if (result.pointsUser > result.pointsCPU) {
+            setResult({ ...result, rankUser: result.rankUser += 1 })
+            console.log("L'utente ha vinto")
+            // console.log("rankUser: ", result.rankUser)
             // console.log("Prova rank", parseInt(storageGet[0].rank) + 1) //incrementa rank
             let currentUser = storageGet.find((i) => props.location.state.username === i.username)
-            console.log("prova:", currentUser)
             currentUser.rank = currentUser.rank + 1
-            console.log("rank di currentUser", currentUser.rank)
+            // console.log("rank di currentUser", currentUser.rank)
             localStorage.setItem('users', JSON.stringify(storageGet))
-        };
-
+        } else {
+            console.log("L'utente ha perso")
+        }
     }
 
+    // useEffect(() => {
+    //     let currentUser = storageGet.find((i) => props.location.state.username === i.username)
+    //     if (result.round === 1 && result.pointsUser > result.pointsCPU) {
+    //         currentUser.rank = currentUser.rank + 1
+    //         console.log("rank di currentUser", currentUser.rank)
+    //     }
+    // }, [result]);
 
-    useEffect(() => {
-        let currentUser = storageGet.find((i) => props.location.state.username === i.username)
-        console.log("prova:", currentUser)
 
-        if (result.round === 1 && result.pointsUser > result.pointsCPU) {
-            currentUser.rank = currentUser.rank + 1
-            console.log("rank di currentUser", currentUser.rank)
-        } else {
+        // if (result.round === 1 && result.pointsUser > result.pointsCPU) {
+        //     currentUser.rank = currentUser.rank + 1
+        //     console.log("rank di currentUser", currentUser.rank)
+        // } else {
 
-        }
-    }, [result]);
+        // }
+    // }, [result]);
 
     const goToRanking = () => {
         props.history.push('/ranking')

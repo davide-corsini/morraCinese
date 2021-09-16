@@ -1,24 +1,16 @@
 import './Ranking.css'
-import React, { useState, useEffect, useRef } from 'react'
 
 const Ranking = () => {
-    let storage = JSON.parse(localStorage.getItem('users'))
-    const [state, setState] = useState({
-        users: storage === null ? [] : storage
-    });
-    const prova = () => {
-        console.log(storage)
+    let users = JSON.parse(localStorage.getItem('users')) 
+    users = users === null ? [] : users
 
-    }
     return (
         <>
             <div className="RankingContainer">
                 <div className="SubRankingContainer">
                     {
-                        state.users &&
-                        state.users.map((el, index) => {
+                        users && users.map((el, _) => {
                             return (
-
                                 <div className="RankingRow">
                                     {el.username}
                                     {el.rank}
@@ -27,7 +19,6 @@ const Ranking = () => {
                         })
                     }
                 </div>
-                <button onClick={prova}>click</button>
             </div>
         </>
     )
